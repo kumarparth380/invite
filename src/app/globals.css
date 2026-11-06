@@ -1,26 +1,202 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-cream: #f7ebd5;
+  --color-card: #fdf6ec;
+  --color-ink: #5b2615;
+  --color-accent: #a8573a;
+  --color-gold: #b9853f;
+  --color-muted: #86553f;
+  --color-bronze: #8c5f26;
+  --color-maroon: #5e1a14;
+
+  --font-script: var(--font-rozha), var(--font-noto-deva), serif;
+  --font-serif: var(--font-tiro), var(--font-noto-deva), serif;
+  --font-label: var(--font-noto-deva), serif;
+  --font-latin: var(--font-bodoni), serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background: #e7d3ae;
+  color: var(--color-ink);
+  -webkit-tap-highlight-color: transparent;
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  font-family: var(--font-serif);
+  background:
+    radial-gradient(120% 80% at 50% 0%, #f1e2c4 0%, transparent 60%),
+    radial-gradient(90% 60% at 50% 100%, #dcc195 0%, transparent 70%),
+    #e7d3ae;
+  min-height: 100svh;
+}
+
+@layer components {
+  /* Typographic roles. Devanagari is never letter-spaced: it breaks the headline (shirorekha). */
+  .inv-script {
+    font-family: var(--font-script);
+    font-weight: 400;
+  }
+  .inv-serif {
+    font-family: var(--font-serif);
+  }
+  .inv-label {
+    font-family: var(--font-label);
+    font-weight: 500;
+  }
+  .inv-latin {
+    font-family: var(--font-latin);
+  }
+
+  /* Glass card used for the date, countdown and RSVP. */
+  .inv-glass {
+    background: rgb(255 255 255 / 0.78);
+    border: 1px solid rgb(91 38 21 / 0.1);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+  }
+
+  .inv-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5cqw;
+    border-radius: 9999px;
+    padding: 2.4cqw 4.5cqw;
+    font-size: 3.4cqw;
+    font-family: var(--font-label);
+    font-weight: 600;
+    /* Devanagari sits high in its line box; nudge it down to centre on the icon. */
+    line-height: 1.2;
+    padding-top: calc(2.4cqw + 0.12em);
+    padding-bottom: calc(2.4cqw - 0.12em);
+    transition:
+      transform 0.15s ease,
+      background-color 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+  .inv-btn:active {
+    transform: scale(0.96);
+  }
+  .inv-btn-solid {
+    background: var(--color-accent);
+    color: #fff;
+    box-shadow: 0 6px 16px -8px rgb(168 87 58 / 0.8);
+  }
+  .inv-btn-ghost {
+    border: 1px solid rgb(91 38 21 / 0.28);
+    color: var(--color-ink);
+    background: rgb(255 255 255 / 0.4);
+  }
+
+  .inv-chip {
+    border-radius: 9999px;
+    border: 1px solid rgb(91 38 21 / 0.16);
+    background: rgb(255 255 255 / 0.7);
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease,
+      border-color 0.2s ease;
+  }
+  .inv-chip[aria-pressed="true"] {
+    background: var(--color-accent);
+    border-color: transparent;
+    color: #fff;
+  }
+
+  .inv-input {
+    width: 100%;
+    border-radius: 2.5cqw;
+    border: 1px solid rgb(91 38 21 / 0.16);
+    background: rgb(255 255 255 / 0.92);
+    padding: 3cqw 4cqw;
+    font-size: max(16px, 3.8cqw); /* >=16px stops iOS from zooming on focus */
+    outline: none;
+    color: var(--color-ink);
+  }
+  .inv-input:focus {
+    border-color: var(--color-gold);
+    box-shadow: 0 0 0 3px rgb(185 133 63 / 0.2);
+  }
+  .inv-input::placeholder {
+    color: rgb(91 38 21 / 0.4);
+  }
+}
+
+@keyframes inv-ping {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  80%,
+  100% {
+    transform: scale(1.7);
+    opacity: 0;
+  }
+}
+.inv-ping {
+  animation: inv-ping 2.4s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes inv-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(5px);
+  }
+}
+.inv-bob {
+  animation: inv-bob 1.8s ease-in-out infinite;
+}
+
+@keyframes inv-flicker {
+  0%,
+  100% {
+    opacity: 0.9;
+    transform: scaleY(1);
+  }
+  40% {
+    opacity: 1;
+    transform: scaleY(1.08);
+  }
+  70% {
+    opacity: 0.8;
+    transform: scaleY(0.95);
+  }
+}
+.inv-flame {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: inv-flicker 1.6s ease-in-out infinite;
+}
+
+@keyframes inv-wave {
+  0%,
+  100% {
+    transform: skewY(0deg) scaleX(1);
+  }
+  50% {
+    transform: skewY(-4deg) scaleX(0.94);
+  }
+}
+.inv-flag {
+  transform-box: fill-box;
+  transform-origin: 0% 50%;
+  animation: inv-wave 2.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .inv-ping,
+  .inv-bob,
+  .inv-flame,
+  .inv-flag {
+    animation: none;
+  }
 }
