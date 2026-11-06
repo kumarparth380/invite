@@ -3,13 +3,14 @@
 import { motion, useReducedMotion, useTransform, type MotionValue } from "motion/react";
 import type { Ref } from "react";
 import { invite } from "@/content/invite";
-import { TEMPLE_DOOR_ORIGIN, TempleScene } from "./art/TempleScene";
+import { scrollToY } from "@/lib/smooth-scroll";
+import { BottomShade, TEMPLE_ZOOM_ORIGIN, TempleImage, TopHaze } from "./art/Photos";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
 /**
- * Full-screen temple scene. Scrolling zooms into the glowing doorway while
- * the invitation (next section, which overlaps this one) rises out of it.
+ * Full-screen temple photo. Scrolling walks through the archway while the
+ * invitation (next section, which overlaps this one) rises into view.
  * `progress` runs 0→1 over the pinned part of this section.
  */
 export function Hero({
@@ -26,7 +27,7 @@ export function Hero({
   // Every range spans 0→1 on purpose: these run on the browser's native
   // ScrollTimeline, where a missing end keyframe falls back to the default
   // style (opacity 1) and the title would fade back in.
-  const scale = useTransform(progress, [0, 0.7, 1], [1, 4.2, 8]);
+  const scale = useTransform(progress, [0, 0.7, 1], [1, 2.3, 3.2]);
   const sceneOpacity = useTransform(progress, [0, 0.55, 0.9, 1], [1, 1, 0, 0]);
   const titleOpacity = useTransform(progress, [0, 0.3, 1], [1, 0, 0]);
   const titleY = useTransform(progress, [0, 0.3, 1], [0, -60, -60]);
@@ -46,8 +47,17 @@ export function Hero({
         className="sticky top-0 h-svh w-full overflow-hidden [--u:min(1cqw,0.44svh)]"
         style={{ opacity: sceneOpacity }}
       >
-        <motion.div className="absolute inset-0" style={{ scale: reduceMotion ? 1 : scale, transformOrigin: TEMPLE_DOOR_ORIGIN }}>
-          <TempleScene className="absolute inset-0 h-full w-full" />
+        <motion.div
+          className="absolute inset-0 will-change-transform"
+          style={{ scale: reduceMotion ? 1 : scale, transformOrigin: TEMPLE_ZOOM_ORIGIN }}
+        >
+          <TempleImage />
+        </motion.div>
+        <motion.div className="absolute inset-0" style={{ opacity: titleOpacity }}>
+          <TopHaze />
+        </motion.div>
+        <motion.div className="absolute inset-0" style={{ opacity: cueOpacity }}>
+          <BottomShade />
         </motion.div>
 
         <motion.div className="absolute inset-x-[10%] top-[5.5%]" style={{ opacity: titleOpacity, y: titleY }}>
@@ -76,7 +86,7 @@ export function Hero({
           <motion.button
             type="button"
             {...item(1.2)}
-            onClick={() => window.scrollTo({ top: window.innerHeight, behavior: "smooth" })}
+            onClick={() => scrollToY(window.innerHeight)}
             className="flex flex-col items-center gap-1 px-[6cqw] py-[2cqw] text-white [text-shadow:0_1px_8px_rgba(0,0,0,.6)]"
           >
             <span className="inv-label text-[3cqw]">मंदिर की ओर बढ़ें</span>

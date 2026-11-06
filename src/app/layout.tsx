@@ -6,6 +6,7 @@ import {
   Tiro_Devanagari_Hindi,
 } from "next/font/google";
 import { invite } from "@/content/invite";
+import "lenis/dist/lenis.css";
 import "./globals.css";
 
 const rozha = Rozha_One({

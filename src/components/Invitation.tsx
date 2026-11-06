@@ -2,6 +2,7 @@
 
 import { AnimatePresence, MotionConfig, useScroll } from "motion/react";
 import { useEffect, useRef, useState } from "react";
+import { startSmoothScroll, stopSmoothScroll } from "@/lib/smooth-scroll";
 import { Backdrop } from "./Backdrop";
 import { Blessing } from "./Blessing";
 import { Closing } from "./Closing";
@@ -31,10 +32,13 @@ export function Invitation() {
   useEffect(() => {
     const root = document.documentElement;
     root.style.overflow = stage === "open" ? "" : "hidden";
+    if (stage === "open") startSmoothScroll();
     return () => {
       root.style.overflow = "";
     };
   }, [stage]);
+
+  useEffect(() => stopSmoothScroll, []);
 
   const open = () => {
     if (stage !== "gate") return;

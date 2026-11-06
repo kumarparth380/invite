@@ -11,15 +11,6 @@ export function Backdrop() {
             "radial-gradient(120% 70% at 50% 0%, #fbf3e3 0%, transparent 60%), radial-gradient(140% 90% at 50% 120%, #ecd7b2 0%, transparent 60%), #f7ebd5",
         }}
       >
-        {/* Paper grain */}
-        <svg className="absolute inset-0 h-full w-full opacity-[0.22] mix-blend-multiply">
-          <filter id="paper-grain">
-            <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch" />
-            <feColorMatrix values="0 0 0 0 0.45  0 0 0 0 0.3  0 0 0 0 0.15  0 0 0 0.35 0" />
-          </filter>
-          <rect width="100%" height="100%" filter="url(#paper-grain)" />
-        </svg>
-
         <Mandala className="absolute top-1/2 left-1/2 w-[120cqw] -translate-x-1/2 -translate-y-1/2 text-gold opacity-[0.07]" />
 
         <div className="absolute inset-[3cqw] rounded-[2cqw] border border-gold/45" />

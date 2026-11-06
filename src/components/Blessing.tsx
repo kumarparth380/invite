@@ -28,21 +28,21 @@ function Person({
 
 /**
  * The invitation text. It is pulled up under the pinned hero and fades in,
- * un-blurs and grows as the temple doorway fills the screen, so it seems to
- * come out of the temple. `progress` is the hero's scroll progress.
+ * rising and growing as the camera passes through the temple archway. `progress` is the hero's scroll progress.
  */
 export function Blessing({ progress }: { progress: MotionValue<number> }) {
   const { bride, groom } = invite;
   const opacity = useTransform(progress, [0, 0.6, 0.88, 1], [0, 0, 1, 1]);
-  const scale = useTransform(progress, [0, 0.6, 0.95, 1], [0.6, 0.6, 1, 1]);
-  const filter = useTransform(progress, [0, 0.6, 0.9, 1], ["blur(8px)", "blur(8px)", "blur(0px)", "blur(0px)"]);
+  // Opacity and transform only: both run on the compositor, so scrolling stays smooth.
+  const scale = useTransform(progress, [0, 0.6, 0.95, 1], [0.86, 0.86, 1, 1]);
+  const y = useTransform(progress, [0, 0.6, 0.95, 1], [60, 60, 0, 0]);
 
   return (
     <section
       id="nimantran"
       className="relative z-10 -mt-[86svh] px-[11cqw] pt-[14svh] pb-[12cqw] text-center"
     >
-      <motion.div style={{ opacity, scale, filter, transformOrigin: "50% 0%" }}>
+      <motion.div style={{ opacity, scale, y, transformOrigin: "50% 0%" }}>
         <Ornament className="w-[30cqw]" />
         <p className="inv-serif mt-[4cqw] text-[3.5cqw] leading-relaxed text-bronze italic">
           वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ।

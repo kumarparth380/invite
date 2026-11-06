@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Ornament } from "@/components/art/Decor";
-import { TempleScene } from "@/components/art/TempleScene";
+import { TempleImage } from "@/components/art/Photos";
 import { invite } from "@/content/invite";
 
 export const metadata: Metadata = {
@@ -26,9 +26,7 @@ export default function OgCard() {
       <div className="absolute inset-[28px] rounded-[10px] border border-gold/30" />
 
       <div className="relative ml-[70px] h-[540px] w-[380px] shrink-0 overflow-hidden rounded-t-full border-4 border-[#d4a24c] shadow-[0_20px_40px_-20px_rgba(91,38,21,.6)]">
-        <div className="absolute inset-0 origin-[50%_92%] scale-[1.42]">
-          <TempleScene className="absolute inset-0 h-full w-full" />
-        </div>
+        <TempleImage className="absolute inset-0" />
       </div>
 
       <div className="flex flex-1 flex-col items-center px-[40px] text-center">
