@@ -34,6 +34,27 @@ the sender ("प्रेषक") and the link-preview text.
 - **Exact map pins:** replace the `mapUrl` values with the "Share → Copy link"
   URL from Google Maps.
 
+## Background music
+
+`public/audio/music.mp3` plays when the guest taps the seal (browsers don't
+allow sound before a tap) and repeats with a short crossfade, so even a
+few-second clip loops without a gap. It pauses while the guest is in another
+app, and the button at the bottom right pauses or resumes it. If the file is
+missing, the button doesn't appear.
+
+- To change the song, replace `public/audio/music.mp3` (or point `music.src` in
+  `src/content/invite.ts` at another file).
+- To loop only part of a longer song, set `music.loopStart` / `music.loopEnd`
+  in seconds, or trim the file:
+
+  ```bash
+  # keep 45 seconds starting at 1:35
+  avconvert -s song.mp3 -o public/audio/music.m4a -p PresetAppleM4A --start 95 --duration 45
+  ```
+
+Only use music you have the right to publish: commercial film songs on a public
+site can be taken down.
+
 ## Deploy
 
 `out/` is plain HTML, CSS and JS, so any static host works.

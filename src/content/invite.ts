@@ -113,6 +113,23 @@ export const invite = {
     deadline: "18 नवंबर 2026",
   },
 
+  /**
+   * Background music. It starts when the guest taps the seal (browsers only
+   * allow sound after a tap) and loops; the button at the bottom right
+   * pauses/resumes it. Put the file in public/audio/. If the file is missing,
+   * the button simply doesn't appear.
+   */
+  music: {
+    src: "/audio/music.mp3",
+    /**
+     * Loop only part of the file, in seconds. 0 and 0 = the whole file, with
+     * silence at the edges trimmed and a short crossfade between repeats.
+     */
+    loopStart: 0,
+    loopEnd: 0,
+    volume: 0.8,
+  },
+
   /** "प्रेषक" — who is sending the invitation. */
   senders: ["श्रीमती रागिनी एवं श्री बृजेश कुमार सिंह"],
   senderAddress: "रैदोपुर, आजमगढ़ (उ.प्र.)",

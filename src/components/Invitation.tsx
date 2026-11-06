@@ -11,12 +11,14 @@ import { DateReveal } from "./DateReveal";
 import { Events } from "./Events";
 import { Gate } from "./Gate";
 import { Hero } from "./Hero";
+import { MusicButton, useMusic } from "./Music";
 import { Rsvp } from "./Rsvp";
 
 type Stage = "gate" | "opening" | "open";
 
 export function Invitation() {
   const [stage, setStage] = useState<Stage>("gate");
+  const music = useMusic();
   const heroRef = useRef<HTMLElement>(null);
   const { scrollYProgress: heroProgress } = useScroll({
     target: heroRef,
@@ -42,6 +44,7 @@ export function Invitation() {
 
   const open = () => {
     if (stage !== "gate") return;
+    music.start(); // inside the tap, so the browser allows sound
     setStage("opening");
     window.setTimeout(() => setStage("open"), 1500);
   };
@@ -64,6 +67,8 @@ export function Invitation() {
       <AnimatePresence>
         {stage !== "open" && <Gate key="gate" opening={stage === "opening"} onOpen={open} />}
       </AnimatePresence>
+
+      <MusicButton show={stage === "open" && music.available} playing={music.playing} onToggle={music.toggle} />
     </MotionConfig>
   );
 }
