@@ -79,7 +79,7 @@ export const invite = {
     {
       id: "mehndi-sangeet",
       title: "मेहंदी एवं संगीत",
-      tint: "#5f7d2e",
+      tint: "#2f7a52",
       icon: "mehndi",
       dayName: "शुक्रवार",
       dateText: "20 नवंबर 2026",

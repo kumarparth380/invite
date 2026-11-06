@@ -97,48 +97,6 @@ export function CornerFlourish({ className = "" }: { className?: string }) {
   );
 }
 
-/** Pointed (ogee) arch that tops each event card. */
-export function ArchTop({
-  fill,
-  stroke,
-  className = "",
-}: {
-  fill: string;
-  stroke: string;
-  className?: string;
-}) {
-  const outline =
-    "M0.5,40 L0.5,24 C0.5,14 14,11 30,7.5 C41,5 47,3.5 50,0.6 C53,3.5 59,5 70,7.5 C86,11 99.5,14 99.5,24 L99.5,40";
-  const inner =
-    "M4.5,27 L4.5,25.5 C4.5,17.5 16,15 31,11.6 C41,9.4 46.5,8 50,5.4 C53.5,8 59,9.4 69,11.6 C84,15 95.5,17.5 95.5,25.5 L95.5,27";
-  return (
-    <svg
-      viewBox="0 -0.5 100 40.5"
-      preserveAspectRatio="none"
-      className={`block w-full ${className}`}
-      aria-hidden="true"
-    >
-      <path d={`${outline} Z`} fill={fill} />
-      <path
-        d={outline}
-        fill="none"
-        stroke={stroke}
-        strokeWidth="1.2"
-        vectorEffect="non-scaling-stroke"
-      />
-      <path
-        d={inner}
-        fill="none"
-        stroke={stroke}
-        strokeOpacity="0.45"
-        strokeWidth="1"
-        strokeDasharray="2 3"
-        vectorEffect="non-scaling-stroke"
-      />
-    </svg>
-  );
-}
-
 /** Small line icons for each ceremony. */
 export function EventIcon({
   kind,
@@ -177,17 +135,44 @@ export function EventIcon({
   }
 
   if (kind === "mehndi") {
-    // A hand with a mehndi motif, next to a dholak.
+    // A hennaed palm (dipped fingertips, a flower in the palm, a dotted cuff)
+    // with a pair of notes for the sangeet.
+    const fingers = [
+      { l: 16, r: 20, top: 10.6 },
+      { l: 20, r: 24, top: 7.6 },
+      { l: 24, r: 28, top: 9.2 },
+      { l: 28, r: 31.6, top: 13 },
+    ];
+    const palm = { x: 23.8, y: 29.6 };
     return (
       <svg {...common}>
-        <path d="M14,42 C9,38 7,32 8,27 L9,18 C9,16.5 11.5,16.5 11.5,18 V25 M11.5,25 V12 C11.5,10.3 14.5,10.3 14.5,12 V23 M14.5,23 V9.5 C14.5,7.8 17.5,7.8 17.5,9.5 V23 M17.5,23 V11 C17.5,9.3 20.5,9.3 20.5,11 V26 L22.5,22.5 C23.5,20.8 26,21.8 25.2,23.6 L21.5,33 C20,37 18,40 18,42" />
-        <circle cx="15.5" cy="30" r="2.6" />
-        <circle cx="15.5" cy="30" r="0.8" fill={color} stroke="none" />
-        <path d="M11.5,36 C13.5,35 17.5,35 19.5,36" strokeOpacity="0.7" />
-        <ellipse cx="34" cy="31" rx="7" ry="9" fill={color} fillOpacity="0.14" />
-        <ellipse cx="34" cy="22" rx="5.5" ry="1.8" />
-        <ellipse cx="34" cy="40" rx="5.5" ry="1.8" />
-        <path d="M28.6,23 L39.4,39 M39.4,23 L28.6,39" strokeOpacity="0.6" />
+        <g transform="translate(-2.4 0)">
+          <path d="M18,44 L17.6,37.5 C15.2,35.6 12.4,31.6 10.4,27.6 C9.4,25.6 11.6,23.9 13.2,25.4 L16,28.4 V13.4 C16,10.6 20,10.6 20,13.4 V21 V10.4 C20,7.6 24,7.6 24,10.4 V21 V12 C24,9.2 28,9.2 28,12 V21.6 V15.6 C28,13 31.6,13 31.6,15.6 V30 C31.6,34.4 30.4,37 29.6,38 L29.6,44" />
+          {fingers.map((f) => (
+            <g key={f.l} fill={color} stroke="none">
+              <path d={`M${f.l},${r2(f.top + 3.4)} V${r2(f.top + 2.8)} C${f.l},${f.top} ${f.r},${f.top} ${f.r},${r2(f.top + 2.8)} V${r2(f.top + 3.4)} Z`} />
+              <circle cx={r2((f.l + f.r) / 2)} cy={r2(f.top + 6.6)} r="0.7" />
+            </g>
+          ))}
+          <circle cx={palm.x} cy={palm.y} r="1.1" fill={color} stroke="none" />
+          {[0, 60, 120, 180, 240, 300].map((deg) => {
+            const p = polar(palm.x, palm.y, 2.5, deg - 90);
+            return <circle key={deg} cx={p.x} cy={p.y} r="1.25" strokeWidth="0.9" fill={color} fillOpacity="0.16" />;
+          })}
+          {[0, 45, 90, 135, 180, 225, 270, 315].map((deg) => {
+            const p = polar(palm.x, palm.y, 5.4, deg - 90);
+            return <circle key={deg} cx={p.x} cy={p.y} r="0.6" fill={color} stroke="none" />;
+          })}
+          <path d="M18,40.6 H29.6" strokeOpacity="0.75" />
+          {[20.4, 23.8, 27.2].map((x) => (
+            <circle key={x} cx={x} cy="42.6" r="0.65" fill={color} stroke="none" />
+          ))}
+          <g strokeWidth="1.3" strokeOpacity="0.9">
+            <ellipse cx="36.6" cy="13" rx="1.7" ry="1.25" transform="rotate(-22 36.6 13)" fill={color} />
+            <ellipse cx="42.2" cy="11.2" rx="1.7" ry="1.25" transform="rotate(-22 42.2 11.2)" fill={color} />
+            <path d="M38.1,12.6 V5.6 L43.7,3.8 V10.8 M38.1,7.6 L43.7,5.8" />
+          </g>
+        </g>
       </svg>
     );
   }
