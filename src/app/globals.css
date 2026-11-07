@@ -49,7 +49,7 @@ body {
     font-family: var(--font-latin);
   }
 
-  /* Card used for the date, countdown and RSVP. No backdrop blur: it would
+  /* Card used for the date and countdown. No backdrop blur: it would
      have to be re-rendered on every scroll frame over the fixed backdrop. */
   .inv-glass {
     background: rgb(255 252 247 / 0.9);
@@ -88,39 +88,6 @@ body {
     border: 1px solid rgb(91 38 21 / 0.28);
     color: var(--color-ink);
     background: rgb(255 255 255 / 0.4);
-  }
-
-  .inv-chip {
-    border-radius: 9999px;
-    border: 1px solid rgb(91 38 21 / 0.16);
-    background: rgb(255 255 255 / 0.7);
-    transition:
-      background-color 0.2s ease,
-      color 0.2s ease,
-      border-color 0.2s ease;
-  }
-  .inv-chip[aria-pressed="true"] {
-    background: var(--color-accent);
-    border-color: transparent;
-    color: #fff;
-  }
-
-  .inv-input {
-    width: 100%;
-    border-radius: 2.5cqw;
-    border: 1px solid rgb(91 38 21 / 0.16);
-    background: rgb(255 255 255 / 0.92);
-    padding: 3cqw 4cqw;
-    font-size: max(16px, 3.8cqw); /* >=16px stops iOS from zooming on focus */
-    outline: none;
-    color: var(--color-ink);
-  }
-  .inv-input:focus {
-    border-color: var(--color-gold);
-    box-shadow: 0 0 0 3px rgb(185 133 63 / 0.2);
-  }
-  .inv-input::placeholder {
-    color: rgb(91 38 21 / 0.4);
   }
 }
 

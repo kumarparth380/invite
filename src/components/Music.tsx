@@ -186,7 +186,7 @@ export function useMusic() {
     }
   }, [playing]);
 
-  // Pause while the guest is in another app (e.g. WhatsApp after RSVP) and
+  // Pause while the guest is in another app (e.g. WhatsApp) and
   // pick up again when they come back.
   useEffect(() => {
     const onVisibility = () => {

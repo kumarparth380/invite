@@ -12,7 +12,6 @@ import { Events } from "./Events";
 import { Gate } from "./Gate";
 import { Hero } from "./Hero";
 import { MusicButton, useMusic } from "./Music";
-import { Rsvp } from "./Rsvp";
 
 type Stage = "gate" | "opening" | "open";
 
@@ -59,7 +58,6 @@ export function Invitation() {
           <DateReveal />
           <Countdown />
           <Events />
-          <Rsvp />
           <Closing />
         </div>
       </main>

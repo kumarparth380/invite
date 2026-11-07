@@ -104,15 +104,6 @@ export const invite = {
     },
   ] satisfies InviteEvent[],
 
-  rsvp: {
-    /**
-     * WhatsApp number that receives RSVPs, with country code and no "+",
-     * e.g. "919876543210". Leave empty to let the guest pick a contact.
-     */
-    whatsappNumber: "",
-    deadline: "18 नवंबर 2026",
-  },
-
   /**
    * Background music. It starts when the guest taps the seal (browsers only
    * allow sound after a tap) and loops; the button at the bottom right

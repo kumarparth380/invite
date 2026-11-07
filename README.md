@@ -7,8 +7,8 @@ Tailwind CSS 4, Motion and Lenis.
 tapped → the entrance of Shri Ram Janmabhoomi Mandir, Ayodhya, under a sunrise
 sky; scrolling walks through its archway → the invitation and family names → a
 gold scratch card that reveals the date → a live countdown → event cards (Haldi,
-Mehndi & Sangeet, Wedding) with directions and "save the date" → an RSVP that
-opens WhatsApp → the closing blessing, the sender's name and a share button.
+Mehndi & Sangeet, Wedding) with directions and "save the date" → the closing
+blessing, the sender's name and a share button.
 
 The two photographs are pre-cropped, colour-graded WebP files in
 `public/images/` (see [Photo credits](#photo-credits)); the small ornaments and
@@ -25,12 +25,9 @@ npm run build      # writes the static site to out/
 ## Change the wording, dates or links
 
 Everything lives in **`src/content/invite.ts`**: names, parents, event dates and
-times, venues, Google Maps links, the RSVP WhatsApp number, the RSVP deadline,
-the sender ("प्रेषक") and the link-preview text.
+times, venues, Google Maps links, the sender ("प्रेषक") and the link-preview
+text.
 
-- **RSVP number:** set `rsvp.whatsappNumber` (country code, digits only, such as
-  `919876543210`). While it is empty, the RSVP opens WhatsApp and lets the guest
-  choose who to send it to.
 - **Exact map pins:** replace the `mapUrl` values with the "Share → Copy link"
   URL from Google Maps.
 
