@@ -39,6 +39,21 @@ export function SectionHeading({ label, title }: { label: string; title: string 
   );
 }
 
+/**
+ * An address that, if it has to wrap, breaks after the place name
+ * ("…बैंक्वेट एंड लॉन," / "बेलइसा, आजमगढ़") rather than in the middle of it.
+ */
+export function Address({ text }: { text: string }) {
+  const cut = text.indexOf(", ");
+  if (cut < 0) return text;
+  return (
+    <>
+      <span className="inline-block">{text.slice(0, cut + 1)}</span>{" "}
+      <span className="inline-block">{text.slice(cut + 2)}</span>
+    </>
+  );
+}
+
 export function MapPinIcon() {
   return (
     <svg viewBox="0 0 24 24" className="size-[1.1em]" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">

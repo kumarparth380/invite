@@ -30,7 +30,9 @@ const mapsSearch = (q: string) =>
 const homeAddress = "रैदोपुर, आजमगढ़";
 const homeMap = mapsSearch("Raidopur, Azamgarh, Uttar Pradesh");
 const weddingVenue = "रॉयल उत्सव बैंक्वेट, आजमगढ़";
-const weddingMap = mapsSearch("Royal Utsav Banquet, Azamgarh");
+/** Full address, shown on the scratch card and the wedding's event card. */
+const weddingAddress = "रॉयल उत्सव बैंक्वेट एंड लॉन, बेलइसा, आजमगढ़";
+const weddingMap = mapsSearch("Royal Utsav Banquet and Lawn, Belaisa, Azamgarh");
 
 export const invite = {
   /** Shown on the gate seal before the invitation is opened. */
@@ -58,6 +60,7 @@ export const invite = {
     year: "2026",
     dateText: "21 नवंबर 2026",
     place: weddingVenue,
+    address: weddingAddress,
     /** Countdown target (IST). */
     start: "2026-11-21T17:00:00+05:30",
   },
@@ -97,7 +100,7 @@ export const invite = {
       dayName: "शनिवार",
       dateText: "21 नवंबर 2026",
       timeText: "सायं 5:00 बजे से",
-      venue: weddingVenue,
+      venue: weddingAddress,
       start: "2026-11-21T17:00:00+05:30",
       hours: 6,
       mapUrl: weddingMap,

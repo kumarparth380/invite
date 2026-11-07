@@ -1,31 +1,12 @@
 "use client";
 
-import { AnimatePresence, motion } from "motion/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { invite } from "@/content/invite";
-import { Reveal, SectionHeading } from "./ui";
+import { celebrate } from "@/lib/celebrate";
+import { Address, Reveal, SectionHeading } from "./ui";
 
 const BRUSH = 26; // px radius of the scratch brush
 const REVEAL_AT = 0.45; // fraction scratched before the foil clears itself
-
-type Petal = { id: number; x: number; y: number; r: number; d: number; c: string; s: number };
-
-function makePetals(): Petal[] {
-  const colors = ["#ee7a1f", "#f6b93b", "#d8453a", "#f39c3c", "#e9c46a"];
-  return Array.from({ length: 22 }, (_, i) => {
-    const angle = (Math.PI * 2 * i) / 22 + Math.random() * 0.4;
-    const dist = 90 + Math.random() * 90;
-    return {
-      id: i,
-      x: Math.cos(angle) * dist,
-      y: Math.sin(angle) * dist * 0.7 + 60,
-      r: Math.random() * 360,
-      d: Math.random() * 0.25,
-      c: colors[i % colors.length],
-      s: 0.7 + Math.random() * 0.6,
-    };
-  });
-}
 
 /** Gold foil over the wedding date; the guest scratches it off. */
 export function DateReveal() {
@@ -36,13 +17,13 @@ export function DateReveal() {
   const moves = useRef(0);
   const revealedRef = useRef(false);
   const [revealed, setRevealed] = useState(false);
-  const [petals, setPetals] = useState<Petal[]>([]);
 
   const reveal = useCallback(() => {
     if (revealedRef.current) return;
     revealedRef.current = true;
     setRevealed(true);
-    setPetals(makePetals());
+    const box = wrapRef.current?.getBoundingClientRect();
+    celebrate(box ? { from: { x: box.left + box.width / 2, y: box.top + box.height / 2 } } : {});
   }, []);
 
   // Paint the foil, and repaint it if the card is resized before it is revealed.
@@ -155,7 +136,9 @@ export function DateReveal() {
             <p className="inv-label mt-[2cqw] text-[3.8cqw] text-ink">
               {wedding.month} · {wedding.year}
             </p>
-            <p className="inv-serif mt-[3cqw] text-[4cqw] text-muted italic">{wedding.place}</p>
+            <p className="inv-serif mt-[3cqw] text-[4cqw] leading-snug text-muted italic">
+              <Address text={wedding.address} />
+            </p>
           </div>
 
           <canvas
@@ -178,20 +161,6 @@ export function DateReveal() {
               last.current = null;
             }}
           />
-
-          <AnimatePresence>
-            {petals.map((p) => (
-              <motion.span
-                key={p.id}
-                className="pointer-events-none absolute top-1/2 left-1/2 block h-[3.2cqw] w-[2cqw] rounded-[50%_50%_50%_0]"
-                style={{ background: p.c }}
-                initial={{ x: 0, y: 0, opacity: 1, rotate: 0, scale: p.s }}
-                animate={{ x: p.x, y: p.y, opacity: [1, 1, 0], rotate: p.r + 240, scale: p.s }}
-                transition={{ duration: 2, ease: [0.2, 0.8, 0.4, 1], delay: p.d }}
-                onAnimationComplete={() => setPetals((all) => all.filter((q) => q.id !== p.id))}
-              />
-            ))}
-          </AnimatePresence>
         </div>
 
         <button

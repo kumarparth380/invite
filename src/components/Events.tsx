@@ -5,7 +5,7 @@ import { invite } from "@/content/invite";
 import { googleCalendarUrl } from "@/lib/calendar";
 import { ArchCard } from "./art/ArchCard";
 import { EventIcon } from "./art/Decor";
-import { CalendarIcon, MapPinIcon, Reveal, SectionHeading } from "./ui";
+import { Address, CalendarIcon, MapPinIcon, Reveal, SectionHeading } from "./ui";
 
 export function Events() {
   const couple = `${invite.bride.name} & ${invite.groom.name}`;
@@ -34,7 +34,9 @@ export function Events() {
                     {ev.dayName} · {ev.dateText}
                   </p>
                   <p className="inv-serif mt-[1cqw] text-[4cqw] text-muted italic">{ev.timeText}</p>
-                  <p className="inv-serif mt-[3cqw] text-[4.6cqw] leading-tight text-ink">{ev.venue}</p>
+                  <p className="inv-serif mt-[3cqw] text-[4.6cqw] leading-tight text-ink">
+                    <Address text={ev.venue} />
+                  </p>
 
                   <div className="mt-[5cqw] flex flex-wrap justify-center gap-[2.5cqw]">
                     <a href={ev.mapUrl} target="_blank" rel="noreferrer" className="inv-btn inv-btn-solid">

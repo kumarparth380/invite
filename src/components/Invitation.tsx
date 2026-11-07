@@ -2,6 +2,7 @@
 
 import { AnimatePresence, MotionConfig, useScroll } from "motion/react";
 import { useEffect, useRef, useState } from "react";
+import { celebrate } from "@/lib/celebrate";
 import { startSmoothScroll, stopSmoothScroll } from "@/lib/smooth-scroll";
 import { Backdrop } from "./Backdrop";
 import { Blessing } from "./Blessing";
@@ -45,6 +46,7 @@ export function Invitation() {
     if (stage !== "gate") return;
     music.start(); // inside the tap, so the browser allows sound
     setStage("opening");
+    celebrate({ delay: 700 }); // as the doors part
     window.setTimeout(() => setStage("open"), 1500);
   };
 
