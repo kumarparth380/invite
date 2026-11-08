@@ -71,8 +71,9 @@ export function Gate({ opening, onOpen }: { opening: boolean; onOpen: () => void
           </span>
         </motion.button>
 
+        {/* Uneven padding centres the Devanagari ink, which sits high in its line box. */}
         <motion.p
-          className="inv-label absolute inset-x-[16%] bottom-[6%] rounded-full bg-black/45 py-[2cqw] text-center text-[3.2cqw] text-white"
+          className="inv-label absolute inset-x-[16%] bottom-[6%] rounded-full bg-black/45 pt-[calc(2cqw+0.22em)] pb-[calc(2cqw-0.22em)] text-center text-[3.2cqw] text-white"
           animate={{ opacity: opening ? 0 : 1 }}
           transition={{ duration: 0.3 }}
         >
