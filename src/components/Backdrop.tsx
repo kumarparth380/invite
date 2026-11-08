@@ -8,7 +8,7 @@ export function Backdrop() {
         className="sticky top-0 h-svh w-full overflow-hidden"
         style={{
           background:
-            "radial-gradient(120% 70% at 50% 0%, #fbf3e3 0%, transparent 60%), radial-gradient(140% 90% at 50% 120%, #ecd7b2 0%, transparent 60%), #f7ebd5",
+            "radial-gradient(70% 45% at 100% 0%, rgba(246,190,196,.28) 0%, transparent 70%), radial-gradient(70% 45% at 0% 100%, rgba(246,190,196,.24) 0%, transparent 70%), radial-gradient(120% 70% at 50% 0%, #fbf3e3 0%, transparent 60%), radial-gradient(140% 90% at 50% 120%, #ecd7b2 0%, transparent 60%), #f7ebd5",
         }}
       >
         <Mandala className="absolute top-1/2 left-1/2 w-[120cqw] -translate-x-1/2 -translate-y-1/2 text-gold opacity-[0.07]" />

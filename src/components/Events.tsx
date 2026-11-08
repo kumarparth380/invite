@@ -1,11 +1,20 @@
 "use client";
 
 import { motion } from "motion/react";
-import { invite } from "@/content/invite";
+import { invite, type InviteEvent } from "@/content/invite";
 import { googleCalendarUrl } from "@/lib/calendar";
 import { ArchCard } from "./art/ArchCard";
 import { EventIcon } from "./art/Decor";
+import type { RoseTone } from "./art/Roses";
+import { CornerSpray } from "./art/Sprays";
 import { Address, CalendarIcon, MapPinIcon, Reveal, SectionHeading } from "./ui";
+
+/** Roses tucked into each card's lower corners, in the ceremony's colours. */
+const SPRAY_TONES: Record<InviteEvent["icon"], [RoseTone, RoseTone, RoseTone]> = {
+  haldi: ["butter", "peach", "ivory"],
+  mehndi: ["coral", "peach", "ivory"],
+  wedding: ["raspberry", "blush", "ivory"],
+};
 
 export function Events() {
   const couple = `${invite.bride.name} & ${invite.groom.name}`;
@@ -25,7 +34,7 @@ export function Events() {
             viewport={{ once: true, margin: "0px 0px -10% 0px" }}
             transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
           >
-            <article className="drop-shadow-[0_10px_18px_rgba(91,38,21,0.12)]">
+            <article className="relative drop-shadow-[0_10px_18px_rgba(91,38,21,0.12)]">
               <ArchCard fill="#fdf6ec" stroke="#b9853f">
                 <div className="px-[6cqw] pt-[8.5cqw] pb-[7cqw] text-center">
                   <EventIcon kind={ev.icon} color={ev.tint} className="mx-auto size-[12cqw]" />
@@ -61,6 +70,8 @@ export function Events() {
                   </div>
                 </div>
               </ArchCard>
+              <CornerSpray tones={SPRAY_TONES[ev.icon]} corner="bl" className="absolute -bottom-[3cqw] -left-[3cqw] w-[22cqw]" />
+              <CornerSpray tones={SPRAY_TONES[ev.icon]} corner="br" className="absolute -right-[3cqw] -bottom-[3cqw] w-[22cqw]" />
             </article>
           </motion.li>
         ))}

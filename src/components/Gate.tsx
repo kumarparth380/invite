@@ -3,6 +3,7 @@
 import { motion } from "motion/react";
 import { invite } from "@/content/invite";
 import { DoorLeafImage, TempleImage, TopHaze } from "./art/Photos";
+import { SealFace, SealWreath } from "./art/Seal";
 
 const DOOR_EASE = [0.65, 0, 0.35, 1] as const;
 
@@ -54,21 +55,15 @@ export function Gate({ opening, onOpen }: { opening: boolean; onOpen: () => void
           onClick={onOpen}
           disabled={opening}
           aria-label="निमंत्रण खोलें"
-          className="absolute top-1/2 left-1/2 z-10 grid size-[25cqw] -translate-x-1/2 -translate-y-1/2 cursor-pointer place-items-center rounded-full outline-none focus-visible:ring-4 focus-visible:ring-[#f3d98a]/70"
+          className="@container absolute top-1/2 left-1/2 z-10 grid size-[25cqw] -translate-x-1/2 -translate-y-1/2 cursor-pointer place-items-center rounded-full outline-none will-change-transform focus-visible:ring-4 focus-visible:ring-[#f3d98a]/70"
           animate={opening ? { scale: 1.2, opacity: 0 } : { scale: 1, opacity: 1 }}
           transition={{ duration: 0.45, ease: "easeIn" }}
           whileTap={{ scale: 0.94 }}
         >
-          <span className="inv-ping absolute inset-0 rounded-full bg-[#f3d98a]/35" />
-          <span
-            className="absolute inset-0 rounded-full shadow-[0_14px_34px_-6px_rgba(0,0,0,.7)]"
-            style={{ background: "radial-gradient(circle at 35% 30%, #fbecb8, #d9a94e 50%, #8c6219)" }}
-          />
-          <span className="absolute inset-[2cqw] rounded-full border border-[#7a5414]/45" />
-          <span className="absolute inset-[3.2cqw] rounded-full border border-dashed border-[#7a5414]/30" />
-          <span className="inv-latin relative text-[9cqw] leading-none tracking-tight text-[#4a2c08] italic">
-            {invite.monogram}
-          </span>
+          <SealWreath className="absolute top-1/2 left-1/2 size-[176%] -translate-x-1/2 -translate-y-1/2" />
+          {/* A ring of light that keeps pulsing out over the roses: "tap here". */}
+          <span className="inv-ping absolute inset-0 rounded-full border-2 border-[#fbe9b4] shadow-[0_0_14px_rgba(251,233,180,.9)]" />
+          <SealFace monogram={invite.monogram} />
         </motion.button>
 
         {/* Uneven padding centres the Devanagari ink, which sits high in its line box. */}

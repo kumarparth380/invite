@@ -4,6 +4,7 @@ import { AnimatePresence, MotionConfig, useScroll } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import { celebrate } from "@/lib/celebrate";
 import { startSmoothScroll, stopSmoothScroll } from "@/lib/smooth-scroll";
+import { RoseDefs } from "./art/Roses";
 import { Backdrop } from "./Backdrop";
 import { Blessing } from "./Blessing";
 import { Closing } from "./Closing";
@@ -52,6 +53,7 @@ export function Invitation() {
 
   return (
     <MotionConfig reducedMotion="user">
+      <RoseDefs />
       <main className="@container relative mx-auto w-full max-w-[480px] overflow-x-clip text-ink shadow-[0_0_80px_rgba(60,25,10,.28)]">
         <Backdrop />
         <div className="relative">

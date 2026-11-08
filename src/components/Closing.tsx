@@ -1,7 +1,7 @@
 "use client";
 
 import { invite } from "@/content/invite";
-import { Ornament } from "./art/Decor";
+import { SealFace, SealWreath } from "./art/Seal";
 import { Reveal, ShareIcon } from "./ui";
 
 export function Closing() {
@@ -22,8 +22,12 @@ export function Closing() {
   return (
     <section className="relative px-[12cqw] pt-[10cqw] pb-[calc(8svh+12cqw)] text-center">
       <Reveal>
-        <Ornament className="w-[30cqw]" />
-        <p className="inv-serif mt-[5cqw] text-[5cqw] leading-snug text-ink italic">
+        {/* The seal from the doors, in its jaimala of roses. */}
+        <div className="@container relative mx-auto mt-[6cqw] grid size-[20cqw] place-items-center">
+          <SealWreath className="absolute top-1/2 left-1/2 size-[176%] -translate-x-1/2 -translate-y-1/2" />
+          <SealFace monogram={invite.monogram} soft />
+        </div>
+        <p className="inv-serif mt-[14cqw] text-[5cqw] leading-snug text-ink italic">
           आपकी गरिमामयी उपस्थिति एवं स्नेहाशीष ही हमारे लिए सबसे अनमोल उपहार है।
         </p>
         <p className="inv-script mt-[5cqw] text-[11cqw] leading-[1.15] text-accent">

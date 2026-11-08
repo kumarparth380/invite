@@ -3,16 +3,17 @@
 A mobile-first, fully static wedding invitation in Hindi, built with Next.js 16,
 Tailwind CSS 4, Motion and Lenis.
 
-**What a guest sees:** carved wooden doors with a gold seal that swing open when
-tapped → the entrance of Shri Ram Janmabhoomi Mandir, Ayodhya, under a sunrise
-sky; scrolling walks through its archway → the invitation and family names → a
-gold scratch card that reveals the date → a live countdown → event cards (Haldi,
-Mehndi & Sangeet, Wedding) with directions and "save the date" → the closing
-blessing, the sender's name and a share button.
+**What a guest sees:** carved wooden doors with a gold seal in a jaimala of
+English roses; tapping the seal swings the doors open → the entrance of Shri Ram
+Janmabhoomi Mandir, Ayodhya, under a sunrise sky; scrolling walks through its
+archway → the invitation and family names → a gold scratch card that reveals the
+date → a live countdown → event cards (Haldi, Mehndi & Sangeet, Wedding) with
+directions and "save the date" → the closing blessing, the sender's name and a
+share button.
 
 The two photographs are pre-cropped, colour-graded WebP files in
-`public/images/` (see [Photo credits](#photo-credits)); the small ornaments and
-icons are SVG in `src/components/art/`.
+`public/images/` (see [Photo credits](#photo-credits)); the roses, ornaments and
+icons are SVG in `src/components/art/` (the roses in `Roses.tsx`).
 
 ## Run it
 

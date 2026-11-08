@@ -5,6 +5,7 @@ import type { Ref } from "react";
 import { invite } from "@/content/invite";
 import { scrollToY } from "@/lib/smooth-scroll";
 import { BottomShade, TEMPLE_ZOOM_ORIGIN, TempleImage, TopHaze } from "./art/Photos";
+import { CornerSpray } from "./art/Sprays";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -58,6 +59,13 @@ export function Hero({
         </motion.div>
         <motion.div className="absolute inset-0" style={{ opacity: cueOpacity }}>
           <BottomShade />
+        </motion.div>
+
+        <motion.div className="pointer-events-none absolute inset-0" style={{ opacity: titleOpacity, y: titleY }}>
+          <motion.div {...item(0.9)}>
+            <CornerSpray tones={["blush", "peach", "ivory"]} className="absolute top-[1cqw] left-[1cqw] w-[calc(32*var(--u))]" />
+            <CornerSpray tones={["blush", "peach", "ivory"]} corner="tr" className="absolute top-[1cqw] right-[1cqw] w-[calc(32*var(--u))]" />
+          </motion.div>
         </motion.div>
 
         <motion.div className="absolute inset-x-[10%] top-[5.5%]" style={{ opacity: titleOpacity, y: titleY }}>
