@@ -27,8 +27,9 @@ export type InviteEvent = {
 const mapsSearch = (q: string) =>
   `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`;
 
-const homeAddress = "रैदोपुर, आजमगढ़";
-const homeMap = mapsSearch("Raidopur, Azamgarh, Uttar Pradesh");
+/** Haldi and mehndi & sangeet are both held here, on 19 November. */
+const hotelVenue = "गरुड़ होटल, सिधारी, आजमगढ़";
+const hotelMap = "https://maps.app.goo.gl/JUuPg2Ft58Fd8kZ7A";
 const weddingVenue = "रॉयल उत्सव बैंक्वेट, आजमगढ़";
 /** Full address, shown on the scratch card and the wedding's event card. */
 const weddingAddress = "रॉयल उत्सव बैंक्वेट एंड लॉन, बेलइसा, आजमगढ़";
@@ -73,24 +74,24 @@ export const invite = {
       icon: "haldi",
       dayName: "गुरुवार",
       dateText: "19 नवंबर 2026",
-      timeText: "सायं 5:00 बजे से",
-      venue: `निवास स्थान, ${homeAddress}`,
-      start: "2026-11-19T17:00:00+05:30",
+      timeText: "प्रातः 11:00 बजे से",
+      venue: hotelVenue,
+      start: "2026-11-19T11:00:00+05:30",
       hours: 3,
-      mapUrl: homeMap,
+      mapUrl: hotelMap,
     },
     {
       id: "mehndi-sangeet",
       title: "मेहंदी एवं संगीत",
       tint: "#2f7a52",
       icon: "mehndi",
-      dayName: "शुक्रवार",
-      dateText: "20 नवंबर 2026",
+      dayName: "गुरुवार",
+      dateText: "19 नवंबर 2026",
       timeText: "सायं 5:00 बजे से",
-      venue: `निवास स्थान, ${homeAddress}`,
-      start: "2026-11-20T17:00:00+05:30",
+      venue: hotelVenue,
+      start: "2026-11-19T17:00:00+05:30",
       hours: 4,
-      mapUrl: homeMap,
+      mapUrl: hotelMap,
     },
     {
       id: "wedding",
